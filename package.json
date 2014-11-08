@@ -1,0 +1,17 @@
+{
+  "name": "haixiu",
+  "version": "1.0.0",
+  "description": "douban haixiu group nodejs version",
+  "main": "haixiu.js",
+  "dependencies": {
+    "ejs": "^1.0.0",
+    "express": "^4.10.1",
+    "path": "^0.4.9"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Youngbye",
+  "license": "ISC"
+}
