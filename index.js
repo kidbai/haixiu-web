@@ -2,17 +2,16 @@ var express = require('express');
 var path = require('path');
 var ejs = require('ejs');
 var mysql = require('mysql');
-var post = require('./controllers/post.js');
 var conn = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'li',
+    password: 'yang',
     database: 'node_crawler'
 });
 
 var postList = [];
 conn.connect();
-conn.query('select * from info limit 15', function (err, results){
+conn.query('select * from tbl_post limit 15', function (err, results){
     if(err){
         console.error(err);
     }
