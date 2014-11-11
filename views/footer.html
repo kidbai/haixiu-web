@@ -1,5 +1,18 @@
             </div>
         </div>
     </div>
+<script src="js/masonry.pkgd.min.js"></script>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script>
+// $('#posts').masonry({
+//     columWidth: 20,
+//     itemSelector: '.post'
+// });
+var container = document.querySelector('#posts');
+var msnry = new Masonry( container, {
+  columnWidth: 30,
+  itemSelector: '.post'
+});
+</script>
 </body>
 </html>
