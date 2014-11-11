@@ -21,3 +21,5 @@ li { list-style: none; }
 .wrap .content { width: 100%; background-color: #ecf0f1; }
 #posts { overflow: hidden; padding-top: 20px; }
 #posts h3 a { font-size: 24px; }
+#posts .thumbnail { width: 23%; margin: 10px; }
+#posts .thumbnail { box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175); }
