@@ -14,13 +14,14 @@ conn.connect();
 conn.query('select * from tbl_post limit 15', function (err, results){
     if(err){
         console.error(err);
+        return;
     }
     results.map(function (item){
        var post = JSON.parse(item['info']);
        postList.push(post);
 
     });
-});   
+}); 
 
 var app = express();
 
@@ -46,8 +47,9 @@ app.get('/update', function (req, res){
     conn.query(sql, function (err, results){
     if(err){
         console.error(err);
+        return err;
     }
-    results.map(function (item){
+    results.forEach(function (item){
        var post = JSON.parse(item['info']);
        postList.push(post);
     });

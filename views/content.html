@@ -7,13 +7,13 @@
             console.log(img);
             img.forEach(function (imgItem){
         %>
-            <img src="<%= imgItem%>" alt="" />
+            <img src="<%- imgItem%>" alt="" />
         <%
             })
         %>  
             <div class="caption">
-            <h3><a href="<%= post.href %>"><%= post.title %></a></h3>
-                <a href="<%= post.author_href%>" class="author"><%= post.author_name %></a>
+            <h3><a href="<%- post.href %>"><%- post.title %></a></h3>
+                <a href="<%- post.author_href%>" class="author"><%- post.author_name %></a>
             </div>
         </div>
                     
