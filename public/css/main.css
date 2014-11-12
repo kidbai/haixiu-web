@@ -18,7 +18,6 @@ li { list-style: none; }
 .wrap .btn-location3 { float: left; height: 46px; line-height: 46px; text-align: center; margin: 18px 0px 0px 20px; width: 150px; border: 1px solid #d9d9da; border-radius: 4px; background-color: #ffffff; color: #737d89; font-size: 14px; }
 .wrap select { height: 46px; width: 115px; border: 1px solid #d9d9da; border-radius: 4px; background-color: #ffffff; color: #737d89; font-size: 14px; }
 .wrap .git-link { font-size: 20px; height: 80px; line-height: 80px; text-align: center; float: right; padding-right: 30px; color: #7b7c7c; }
-/*.wrap .content { width: 100%; background-color: #ecf0f1; }*/
 #posts { padding-top: 20px; background-color: #ecf0f1; }
 
 #posts h3 a { font-size: 24px; }
