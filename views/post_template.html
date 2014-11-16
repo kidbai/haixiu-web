@@ -1,17 +1,21 @@
-<% postList.forEach(function (post){ %>
+<% 
+    postList.forEach(function (post){
+        var img = {};
+        img = JSON.parse(post.img);
+        var imgs = [];
+        imgs = img['imgs'];
+%>
         <div class="thumbnail post">
             <%
-            var img = [];
-            img = post.img;
-            img.forEach(function (imgItem){
+            imgs.forEach(function (item_img){
             %>
-            <img src="<%= imgItem%>" alt="" />
+                <img src="<%= item_img%>" alt="" />
             <%
-                });
-            %>  
+            })
+            %>
             <div class="caption">
-                <h3><a href="<%= post.href %>"><%= post.title %></a></h3>
-                <a href="<%= post.author_href%>" class="author">Author : <%= post.author_name %></a>
+                <h3><a href="<%= post.url%>"><%= post.title%></a></h3>
+                <a href="<%= post.author_url%>" class="author">Author : <%= post.author_name%></a>
             </div>
         </div>
 <% }) %>

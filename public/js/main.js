@@ -42,14 +42,15 @@ loading_post = false;
 var nowPage = 1;
 function scrollHandler()
 {
-  if(get_scroll_height() - get_client_height() - 50 <= get_scroll_top()) {
+  if(get_scroll_height() - get_client_height() - 10 <= get_scroll_top()) {
+    console.log('loading-post');
     if (loading_post) return;
     loading_post = true;
     console.log(loading_post);
     nowPage++;
     console.log('nowPage=' + nowPage);
     $.ajax({
-      url: '/update',
+      url: '/load-post',
       data: { page : nowPage },
       success: function (data){
         loading_post = false;
@@ -62,11 +63,7 @@ function scrollHandler()
                 container.append(html).masonry('appended', html);
             });
           }
-        else
-        {
-          // alert('没了');
-        }
-        
+                
         }
       }
     });

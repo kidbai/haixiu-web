@@ -9,19 +9,17 @@ var conn = mysql.createConnection({
     database: 'node_crawler'
 });
 
-var postList = [];
 conn.connect();
-conn.query('select * from tbl_post limit 15', function (err, results){
-    if(err){
-        console.error(err);
-        return;
-    }
-    results.map(function (item){
-       var post = JSON.parse(item['info']);
-       postList.push(post);
+// conn.query('select * from tbl_post_new limit 15', function (err, results){
+//     if(err){
+//         console.error(err);
+//         return;
+//     }
+//     results.forEach(function (item){
+//         postList.push(item);
 
-    });
-}); 
+//     });
+// }); 
 
 var app = express();
 
@@ -31,13 +29,10 @@ app.set('view engine', 'html');
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function (req, res){
-    res.render('content',{
-        postList : postList
-    }); 
+    res.render('content'); 
 });
 
 app.get('/init', function (req, res){
-    var postList = [];
     var firstPage = req.query.firstPage;
     console.log(firstPage);
     var pageSize = 15;
@@ -45,17 +40,16 @@ app.get('/init', function (req, res){
     {
         return false;
     }
-    var sql = 'select * from tbl_post limit 15 ';
+    var sql = 'select * from tbl_post_new limit 15 ';
     conn.query(sql, function (err, results){
         if(err){
             console.error(err);
         }
-        console.log(results);
+        var postList = [];
+        console.log(results.length);
         results.forEach(function (item){
-            var post = JSON.parse(item['info']);
-            postList.push(post);
+            postList.push(item);
         });
-        // console.log(postList);
         res.render('post_template', { postList : postList }, function (err, html){
             if(err){
                 console.error(err);
@@ -67,8 +61,7 @@ app.get('/init', function (req, res){
     
 });
 
-app.get('/update', function (req, res){
-    var postList = [];
+app.get('/load-post', function (req, res){
     var page = req.query.page;
     if(page < 1 || isNaN(page)){
         page = 1;
@@ -76,17 +69,17 @@ app.get('/update', function (req, res){
     console.log(page);
     var pageSize = 15;
     var n = (page - 1) * 15;
-    var sql = "select * from tbl_post limit " + n + "," + pageSize; //改成你那边的数据库表名
+    var sql = "select * from tbl_post_new limit " + n + "," + pageSize; //改成你那边的数据库表名
     conn.query(sql, function (err, results){
         if(err){
             console.error(err);
             return err;
         }
+        var postList = [];
         results.forEach(function (item){
-           var post = JSON.parse(item['info']);
-           postList.push(post);
+           postList.push(item);
         });
-        console.log(postList);
+        // console.log(postList);
         res.render('post_template', { postList: postList }, function (err, html){
             res.send(html);
         });
