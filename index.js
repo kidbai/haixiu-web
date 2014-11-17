@@ -40,7 +40,7 @@ app.get('/init', function (req, res){
     {
         return false;
     }
-    var sql = 'select * from tbl_post_new limit 15 ';
+    var sql = 'select * from tbl_post limit 15 ';
     conn.query(sql, function (err, results){
         if(err){
             console.error(err);
@@ -69,7 +69,7 @@ app.get('/load-post', function (req, res){
     console.log(page);
     var pageSize = 15;
     var n = (page - 1) * 15;
-    var sql = "select * from tbl_post_new limit " + n + "," + pageSize; //改成你那边的数据库表名
+    var sql = "select * from tbl_post limit " + n + "," + pageSize; //改成你那边的数据库表名
     conn.query(sql, function (err, results){
         if(err){
             console.error(err);
