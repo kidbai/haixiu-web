@@ -3,10 +3,10 @@ var path = require('path');
 var ejs = require('ejs');
 var mysql = require('mysql');
 var conn = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'yang',
-    database: 'node_crawler'
+    host: 'us-cdbr-iron-east-01.cleardb.net',
+    user: 'b30eec73f5ec0b',
+    password: '9a8fc9a6',
+    database: 'heroku_fc64d125b2183e4'
 });
 
 conn.connect();
