@@ -4,9 +4,9 @@ var ejs = require('ejs');
 var mysql = require('mysql');
 var conn = mysql.createConnection({
     host: 'us-cdbr-iron-east-01.cleardb.net',
-    user: 'b30eec73f5ec0b',
-    password: '9a8fc9a6',
-    database: 'heroku_fc64d125b2183e4'
+    user: 'b875511a83fee8',
+    password: '4428b7df',
+    database: 'heroku_28ce897a21c469d'
 });
 
 conn.connect();
