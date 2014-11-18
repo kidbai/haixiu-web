@@ -2,12 +2,7 @@ var express = require('express');
 var path = require('path');
 var ejs = require('ejs');
 var mysql = require('mysql');
-// var conn = mysql.createConnection({
-//     host: 'us-cdbr-iron-east-01.cleardb.net',
-//     user: 'b875511a83fee8',
-//     password: '4428b7df',
-//     database: 'heroku_28ce897a21c469d'
-// });
+
 
 var db_config = ({
     connectionLimit: 10,
@@ -25,8 +20,8 @@ function handleDisconnect(){
     conn.connect(function (err){
         if(err){
             console.log('error when connecting to db:', err);
+            setTimeout(handleDisconnect, 2000);
         }
-        setTimeout(handleDisconnect, 2000);
     });
 
     conn.on('error', function (err){
