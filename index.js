@@ -2,24 +2,45 @@ var express = require('express');
 var path = require('path');
 var ejs = require('ejs');
 var mysql = require('mysql');
-var conn = mysql.createConnection({
+// var conn = mysql.createConnection({
+//     host: 'us-cdbr-iron-east-01.cleardb.net',
+//     user: 'b875511a83fee8',
+//     password: '4428b7df',
+//     database: 'heroku_28ce897a21c469d'
+// });
+
+var db_config = ({
     host: 'us-cdbr-iron-east-01.cleardb.net',
     user: 'b875511a83fee8',
     password: '4428b7df',
     database: 'heroku_28ce897a21c469d'
 });
 
-conn.connect();
-// conn.query('select * from tbl_post_new limit 15', function (err, results){
-//     if(err){
-//         console.error(err);
-//         return;
-//     }
-//     results.forEach(function (item){
-//         postList.push(item);
+var conn;
 
-//     });
-// }); 
+function handleDisconnect(){
+    conn = mysql.createConnection(db_config);
+
+    conn.connect(function (err){
+        if(err){
+            console.log('error when connecting to db:', err);
+        }
+        setTimeout(handleDisconnect, 2000);
+    });
+
+    conn.on('error', function (err){
+        console.log('db error', err);
+        if(err.code === 'PROTOCOL_CONNECTION_LOST'){
+            handleDisconnect();
+        }
+        else{
+            throw err;
+        }
+    });
+}
+
+handleDisconnect();
+
 
 var app = express();
 
