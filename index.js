@@ -105,7 +105,7 @@ app.get('/load-post', function (req, res){
     });
 });
 
-var port = Number(process.env.port || 3000);
-app.listen(port, function(){
-    console.log('listen port:' + port);
+// var port = Number(process.env.port || 3000);
+app.listen(process.env.port || 3000, function(){
+    console.log('listen');
 });
