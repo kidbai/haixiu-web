@@ -61,7 +61,7 @@ app.get('/init', function (req, res){
     {
         return false;
     }
-    var sql = 'select * from tbl_post limit 15 ';
+    var sql = 'select * from tbl_post limit 10 ';
     conn.query(sql, function (err, results){
         if(err){
             console.error(err);
@@ -88,8 +88,8 @@ app.get('/load-post', function (req, res){
         page = 1;
     }
     console.log(page);
-    var pageSize = 15;
-    var n = (page - 1) * 15;
+    var pageSize = 10;
+    var n = (page - 1) * 10;
     var sql = "select * from tbl_post limit " + n + "," + pageSize; //改成你那边的数据库表名
     conn.query(sql, function (err, results){
         if(err){
