@@ -10,6 +10,7 @@ var mysql = require('mysql');
 // });
 
 var db_config = ({
+    connectionLimit: 10,
     host: 'us-cdbr-iron-east-01.cleardb.net',
     user: 'b875511a83fee8',
     password: '4428b7df',
