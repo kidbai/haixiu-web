@@ -73,22 +73,22 @@ $(window).scroll(scrollHandler);
 
 $(function (){
   var firstPage = 1;
-  $.ajax({
-    url: '/init',
-    data:{ firstPage : firstPage },
-    success: function(data){
-      // console.log(data);
-      if(data != null)
-      {
-        if(data.length > 0)
-        {
-          var html = $(data);
-          html.imagesLoaded(function() {
-            container.append(html).masonry('appended', html, true);
-            container.masonry('layout');
-          });
-        }
-      }
-    }
-  });
+  // $.ajax({
+  //   url: '/init',
+  //   data:{ firstPage : firstPage },
+  //   success: function(data){
+  //     // console.log(data);
+  //     if(data != null)
+  //     {
+  //       if(data.length > 0)
+  //       {
+  //         var html = $(data);
+  //         html.imagesLoaded(function() {
+  //           container.append(html).masonry('appended', html, true);
+  //           container.masonry('layout');
+  //         });
+  //       }
+  //     }
+  //   }
+  // });
 });
