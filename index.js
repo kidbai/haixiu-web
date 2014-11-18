@@ -66,6 +66,7 @@ app.get('/init', function (req, res){
         if(err){
             console.error(err);
         }
+        console.log(results);
         var postList = [];
         console.log(results.length);
         results.forEach(function (item){
@@ -96,6 +97,7 @@ app.get('/load-post', function (req, res){
             console.error(err);
             return err;
         }
+        console.log(results);
         var postList = [];
         results.forEach(function (item){
            postList.push(item);
