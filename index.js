@@ -86,4 +86,7 @@ app.get('/load-post', function (req, res){
     });
 });
 
-app.listen(process.env.PORT || 3000);
+var port = Number(process.env.port || 3000);
+app.listen(port, function(){
+    console.log('listen port:' + port);
+});
