@@ -7,7 +7,7 @@ box-sizing: border-box; z-index: 0; outline: none; padding:0px; margin:0px;font-
 a { text-decoration: none; }
 img { border: none; }
 li { list-style: none; }
-
+.clear { clear: both;}
 .wrap { width: 100%; position: relative; }
 
 .wrap .header { width: 100%; height: 80px; }
@@ -17,9 +17,16 @@ li { list-style: none; }
 .wrap .btn-location2 { float: left; height: 46px; line-height: 46px; text-align: center; margin: 18px 0px 0px 20px; width: 100px; border: 1px solid #d9d9da; border-radius: 4px; background-color: #ffffff; color: #737d89; font-size: 14px; }
 .wrap .btn-location3 { float: left; height: 46px; line-height: 46px; text-align: center; margin: 18px 0px 0px 20px; width: 150px; border: 1px solid #d9d9da; border-radius: 4px; background-color: #ffffff; color: #737d89; font-size: 14px; }
 .wrap select { height: 46px; width: 115px; border: 1px solid #d9d9da; border-radius: 4px; background-color: #ffffff; color: #737d89; font-size: 14px; }
-.wrap .git-link { font-size: 20px; height: 80px; line-height: 80px; text-align: center; float: right; padding-right: 30px; color: #7b7c7c; }
+.wrap .about { font-size: 20px; height: 80px; line-height: 80px; text-align: center; float: right; padding-right: 30px; color: #7b7c7c; }
 #posts { padding-top: 20px; background-color: #ecf0f1; }
 #posts h3 a { font-size: 24px; }
 #posts .thumbnail { width: 23%; margin: 10px; }
 #posts .thumbnail { box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175); }
-#search-city { width: 200px; height: 40px; margin: 20px 0px 0px 30px; color: #737d89; line-height: 40px; border-radius: 4px; }
+#search-city { float: left; width: 200px; height: 40px; margin: 20px 0px 0px 30px; color: #737d89; line-height: 40px; border-radius: 4px; }
+.info { font-size: 60px; color: #737d89; line-height: 60px; padding: 20px; }
+.name { font-size: 30px; color: #737d89; line-height: 30px; padding: 20px; }
+#hot-city-title { float: left; height: 100%; line-height: 80px; text-align: center; margin-left: 50px; }
+#hot-city { height: 100%; float: left; margin: 0px 0px 0px 0px; }
+#hot-city ul { height: 100%; }
+#hot-city li { float: left; width: 50px; height: 100%; cursor: pointer; line-height: 80px; text-align: center; }
+#hot-city li:hover { background-color: #ecf0f1; }

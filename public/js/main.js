@@ -72,6 +72,31 @@ function scrollHandler()
 $(window).scroll(scrollHandler);
 
 $(function (){
+
+  $('#hot-city li').click(function (){
+    var city = $(this).text();
+    $.ajax({
+      url: 'search-city',
+      data:{ city : city },
+      success: function(data)
+      {
+        if(data != null)
+        {
+          if(data.length > 0)
+          {
+            var post = $(".post");
+            container.masonry('remove', post);
+            var html = $(data);
+            html.imagesLoaded(function() {
+              container.append(html).masonry('appended', html, true);
+              container.masonry('layout');
+            });
+          }
+        }
+      }
+    });
+    console.log(city);
+  }); 
   var firstPage = 1;
   $.ajax({
     url: '/init',

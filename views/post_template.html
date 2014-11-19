@@ -1,10 +1,21 @@
-<% 
+<%
+    if(postList.length == 0)
+    {
+%>
+        <div class="post">没有该城市的内容</div>
+<%
+    }
+    else
+    {
+%>
+    <% 
     postList.forEach(function (post){
         var img = {};
         img = JSON.parse(post.img);
         var imgs = [];
         imgs = img['imgs'];
-%>
+        console.log(post);
+    %>
         <div class="thumbnail post">
             <%
             imgs.forEach(function (item_img){
@@ -15,7 +26,17 @@
             %>
             <div class="caption">
                 <h3><a href="<%= post.url%>"><%= post.title%></a></h3>
-                <a href="<%= post.author_url%>" class="author">Author : <%= post.author_name%></a>
+                <label>作者:</label>
+                <a href="<%= post.author_url%>" class="author">
+                    <%= post.author_name%>
+                </a>
+                <div class="clear"></div>
+                <label>所在地:</label> 
+                <span><%= post.location%></span>
             </div>
         </div>
-<% }) %>
+    <% }) %>
+<%
+    }
+%>
+

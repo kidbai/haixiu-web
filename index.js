@@ -115,22 +115,36 @@ app.get('/search-city', function (req, res){
     console.log(city);
     pool.getConnection(function (err, conn){
         conn.query('select * from tbl_post where location like ?','%' + city + '%', function (err, results){
+            var postList = [];
             if(err){
                 console.error(err);
             }
             else{
                 console.log(results);
             }
-            var postList = [];
-            results.forEach(function (item){
-               postList.push(item);
-            });
-            res.render('post_template', { postList : postList }, function (err, html){
-                res.send(html);
-            })
-            conn.release();
+            if(results.length == 0)
+            {
+                res.render('post_template', { postList : postList }, function (err, html){
+                    res.send(html);
+                })            
+            }
+            else
+            {
+                results.forEach(function (item){
+                   postList.push(item);
+                });
+                res.render('post_template', { postList : postList }, function (err, html){
+                    res.send(html);
+                })
+                conn.release();
+            }
+           
         });
     }) ;
+});
+
+app.get('/author', function (req, res){
+    res.render('author');
 });
 
 var port = process.env.PORT || 3000;
