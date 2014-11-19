@@ -2,7 +2,7 @@
     if(postList.length == 0)
     {
 %>
-        <div class="post">没有该城市的内容</div>
+        <div class="post">没有内容了</div>
 <%
     }
     else
@@ -15,6 +15,9 @@
         var imgs = [];
         imgs = img['imgs'];
         console.log(post);
+        console.log(imgs == null);
+        if(imgs != null)
+        {
     %>
         <div class="thumbnail post">
             <%
@@ -35,6 +38,10 @@
                 <span><%= post.location%></span>
             </div>
         </div>
+    <%
+        }
+    %>
+        
     <% }) %>
 <%
     }
