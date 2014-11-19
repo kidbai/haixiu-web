@@ -4,49 +4,58 @@ var ejs = require('ejs');
 var mysql = require('mysql');
 
 
-// var db_config = ({
-//     connectionLimit: 5,
-//     host: 'us-cdbr-iron-east-01.cleardb.net',
-//     user: 'b875511a83fee8',
-//     password: '4428b7df',
-//     database: 'heroku_28ce897a21c469d'
-// });
+var db_config = ({
+    connectionLimit: 5,
+    host: 'us-cdbr-iron-east-01.cleardb.net',
+    user: 'b875511a83fee8',
+    password: '4428b7df',
+    database: 'heroku_28ce897a21c469d'
+});
 
-// var conn;
+var conn;
 
-// function handleDisconnect(){
-//     conn = mysql.createConnection(db_config);
+function handleDisconnect(){
+    conn = mysql.createConnection(db_config);
 
-//     conn.connect(function (err){
-//         if(err){
-//             console.log('error when connecting to db:', err);
-//             setTimeout(handleDisconnect, 2000);
-//         }
-//     });
+    conn.connect(function (err){
+        if(err){
+            console.log('error when connecting to db:', err);
+            setTimeout(handleDisconnect, 2000);
+        }
+    });
 
-//     conn.on('error', function (err){
-//         console.log('db error', err);
-//         if(err.code === 'PROTOCOL_CONNECTION_LOST'){
-//             handleDisconnect();
-//         }
-//         else{
-//             throw err;
-//         }
-//     });
-// }
+    conn.on('error', function (err){
+        console.log('db error', err);
+        if(err.code === 'PROTOCOL_CONNECTION_LOST'){
+            handleDisconnect();
+        }
+        else{
+            throw err;
+        }
+    });
+}
 
-// handleDisconnect();
 
 
 var app = express();
 
 app.engine('.html', ejs.__express);
+app.set('port', (process.env.PORT || 5000));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'html');
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function (req, res){
+    handleDisconnect();
     res.render('content'); 
+    conn.query('select * from tbl_post', function (err, results){
+        if(err){
+            console.error(err);
+        }
+        else{
+            res.send(results);
+        }
+    });
 });
 
 // app.get('/init', function (req, res){
@@ -105,7 +114,7 @@ app.get('/', function (req, res){
 //     });
 // });
 
-var port = process.env.port || 3000;
-app.listen(port, function(){
-    console.log('listen port:' + port);
-});
+var port = process.env.PORT || 3000;
+app.listen(port, function() {
+  console.log("Node app is running at localhost:" + port)
+})
