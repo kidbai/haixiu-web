@@ -43,10 +43,8 @@ var nowPage = 1;
 function scrollHandler()
 {
   if(get_scroll_height() - get_client_height() - 10 <= get_scroll_top()) {
-    console.log('loading-post');
     if (loading_post) return;
     loading_post = true;
-    console.log(loading_post);
     nowPage++;
     console.log('nowPage=' + nowPage);
     $.ajax({
@@ -58,7 +56,6 @@ function scrollHandler()
         {
           if(data.length > 0){
             var html = $(data);
-            console.log(html);
             html.imagesLoaded(function() {
                 container.append(html).masonry('appended', html);
             });
@@ -95,14 +92,12 @@ $(function (){
         }
       }
     });
-    console.log(city);
   }); 
   var firstPage = 1;
   $.ajax({
     url: '/init',
     data:{ firstPage : firstPage },
     success: function(data){
-      // console.log(data);
       if(data != null)
       {
         if(data.length > 0)
@@ -121,7 +116,6 @@ $(function (){
     var city;
     if(event.which == 13)
     {
-      console.log($(this).val()=='');
       if($(this).val() == '')
       {
         alert("City can't be null");
