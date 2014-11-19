@@ -48,32 +48,23 @@ app.use(express.static(__dirname + '/public'));
 app.get('/', function (req, res){
     handleDisconnect();
     res.render('content'); 
-    // conn.query('select * from tbl_post', function (err, results){
-    //     if(err){
-    //         console.error(err);
-    //     }
-    //     else{
-    //         res.send(results);
-    //     }
-    // });
+    
 });
 
 app.get('/init', function (req, res){
     var firstPage = req.query.firstPage;
     console.log(firstPage);
-    var pageSize = 15;
     if(firstPage != 1)
     {
         return false;
     }
-    var sql = 'select * from tbl_post limit 10 ';
+    var sql = 'select * from tbl_post limit 15 ';
     conn.query(sql, function (err, results){
         if(err){
             console.error(err);
         }
         console.log(results);
         var postList = [];
-        console.log(results.length);
         results.forEach(function (item){
             postList.push(item);
         });
