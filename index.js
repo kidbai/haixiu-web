@@ -5,35 +5,37 @@ var mysql = require('mysql');
 
 
 var db_config = ({
-    connectionLimit: 5,
+    connectionLimit: 10,
     host: 'us-cdbr-iron-east-01.cleardb.net',
     user: 'b875511a83fee8',
     password: '4428b7df',
     database: 'heroku_28ce897a21c469d'
 });
 
-var conn;
+var pool = mysql.createPool(db_config);
 
-function handleDisconnect(){
-    conn = mysql.createConnection(db_config);
+// var conn;
 
-    conn.connect(function (err){
-        if(err){
-            console.log('error when connecting to db:', err);
-            setTimeout(handleDisconnect, 2000);
-        }
-    });
+// function handleDisconnect(){
+//     conn = mysql.createConnection(db_config);
 
-    conn.on('error', function (err){
-        console.log('db error', err);
-        if(err.code === 'PROTOCOL_CONNECTION_LOST'){
-            handleDisconnect();
-        }
-        else{
-            throw err;
-        }
-    });
-}
+//     conn.connect(function (err){
+//         if(err){
+//             console.log('error when connecting to db:', err);
+//             setTimeout(handleDisconnect, 2000);
+//         }
+//     });
+
+//     conn.on('error', function (err){
+//         console.log('db error', err);
+//         if(err.code === 'PROTOCOL_CONNECTION_LOST'){
+//             handleDisconnect();
+//         }
+//         else{
+//             throw err;
+//         }
+//     });
+// }
 
 
 
@@ -46,7 +48,6 @@ app.set('view engine', 'html');
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function (req, res){
-    handleDisconnect();
     res.render('content'); 
     
 });
@@ -59,22 +60,26 @@ app.get('/init', function (req, res){
         return false;
     }
     var sql = 'select * from tbl_post limit 15 ';
-    conn.query(sql, function (err, results){
-        if(err){
-            console.error(err);
-        }
-        console.log(results);
-        var postList = [];
-        results.forEach(function (item){
-            postList.push(item);
-        });
-        res.render('post_template', { postList : postList }, function (err, html){
+    pool.getConnection(function (err, conn){
+        conn.query(sql, function (err, results){
             if(err){
                 console.error(err);
             }
-            res.send(html);
-        });
-    }); 
+            console.log(results);
+            var postList = [];
+            results.forEach(function (item){
+                postList.push(item);
+            });
+            res.render('post_template', { postList : postList }, function (err, html){
+                if(err){
+                    console.error(err);
+                }
+                res.send(html);
+            });
+            conn.release();
+        }); 
+    });
+    
     
     
 });
