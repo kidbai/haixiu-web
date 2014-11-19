@@ -42,8 +42,12 @@ loading_post = false;
 var nowPage = 1;
 function scrollHandler()
 {
+  $('.spinner').removeClass('hide');
   if(get_scroll_height() - get_client_height() - 10 <= get_scroll_top()) {
-    if (loading_post) return;
+    if (loading_post)
+    {
+      return false;
+    }
     loading_post = true;
     nowPage++;
     console.log('nowPage=' + nowPage);
@@ -59,6 +63,7 @@ function scrollHandler()
             html.imagesLoaded(function() {
                 container.append(html).masonry('appended', html);
             });
+            $('.spinner').addClass('hide');
           }
                 
         }
@@ -71,6 +76,7 @@ $(window).scroll(scrollHandler);
 $(function (){
 
   $('#hot-city li').click(function (){
+    $('.spinner').removeClass('hide');
     var city = $(this).text();
     $.ajax({
       url: 'search-city',
@@ -88,6 +94,7 @@ $(function (){
               container.append(html).masonry('appended', html, true);
               container.masonry('layout');
             });
+            $('.spinner').addClass('hide');
           }
         }
       }
@@ -106,6 +113,7 @@ $(function (){
           html.imagesLoaded(function() {
             container.append(html).masonry('appended', html, true);
             container.masonry('layout');
+            $('.spinner').addClass("hide");
           });
         }
       }

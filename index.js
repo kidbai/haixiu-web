@@ -14,35 +14,9 @@ var db_config = ({
 
 var pool = mysql.createPool(db_config);
 
-// var conn;
-
-// function handleDisconnect(){
-//     conn = mysql.createConnection(db_config);
-
-//     conn.connect(function (err){
-//         if(err){
-//             console.log('error when connecting to db:', err);
-//             setTimeout(handleDisconnect, 2000);
-//         }
-//     });
-
-//     conn.on('error', function (err){
-//         console.log('db error', err);
-//         if(err.code === 'PROTOCOL_CONNECTION_LOST'){
-//             handleDisconnect();
-//         }
-//         else{
-//             throw err;
-//         }
-//     });
-// }
-
-
-
 var app = express();
 
 app.engine('.html', ejs.__express);
-app.set('port', (process.env.PORT || 5000));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'html');
 app.use(express.static(__dirname + '/public'));
