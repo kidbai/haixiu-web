@@ -42,8 +42,8 @@ loading_post = false;
 var nowPage = 1;
 function scrollHandler()
 {
-  $('.spinner').removeClass('hide');
   if(get_scroll_height() - get_client_height() - 10 <= get_scroll_top()) {
+    $('.spinner').removeClass('hide');
     if (loading_post)
     {
       return false;
@@ -76,7 +76,8 @@ $(window).scroll(scrollHandler);
 $(function (){
 
   $('#hot-city li').click(function (){
-    $('.spinner').removeClass('hide');
+    var post = $(".post");
+    container.masonry('remove', post);  
     var city = $(this).text();
     $.ajax({
       url: 'search-city',
@@ -87,14 +88,12 @@ $(function (){
         {
           if(data.length > 0)
           {
-            var post = $(".post");
-            container.masonry('remove', post);
+            
             var html = $(data);
             html.imagesLoaded(function() {
               container.append(html).masonry('appended', html, true);
               container.masonry('layout');
             });
-            $('.spinner').addClass('hide');
           }
         }
       }
@@ -121,9 +120,12 @@ $(function (){
   });
 
   $('#search-city').keydown(function(event){
+   
     var city;
     if(event.which == 13)
     {
+      var post = $(".post");
+      container.masonry('remove', post);  
       if($(this).val() == '')
       {
         alert("City can't be null");
@@ -141,8 +143,6 @@ $(function (){
             {
               if(data.length > 0)
               {
-                var post = $(".post");
-                container.masonry('remove', post);
                 var html = $(data);
                 html.imagesLoaded(function() {
                   container.append(html).masonry('appended', html, true);
