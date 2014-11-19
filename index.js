@@ -88,31 +88,31 @@ app.get('/init', function (req, res){
     
 });
 
-// app.get('/load-post', function (req, res){
-//     var page = req.query.page;
-//     if(page < 1 || isNaN(page)){
-//         page = 1;
-//     }
-//     console.log(page);
-//     var pageSize = 10;
-//     var n = (page - 1) * 10;
-//     var sql = "select * from tbl_post limit " + n + "," + pageSize; //改成你那边的数据库表名
-//     conn.query(sql, function (err, results){
-//         if(err){
-//             console.error(err);
-//             return err;
-//         }
-//         console.log(results);
-//         var postList = [];
-//         results.forEach(function (item){
-//            postList.push(item);
-//         });
-//         // console.log(postList);
-//         res.render('post_template', { postList: postList }, function (err, html){
-//             res.send(html);
-//         });
-//     });
-// });
+app.get('/load-post', function (req, res){
+    var page = req.query.page;
+    if(page < 1 || isNaN(page)){
+        page = 1;
+    }
+    console.log(page);
+    var pageSize = 10;
+    var n = (page - 1) * 10;
+    var sql = "select * from tbl_post limit " + n + "," + pageSize; //改成你那边的数据库表名
+    conn.query(sql, function (err, results){
+        if(err){
+            console.error(err);
+            return err;
+        }
+        console.log(results);
+        var postList = [];
+        results.forEach(function (item){
+           postList.push(item);
+        });
+        // console.log(postList);
+        res.render('post_template', { postList: postList }, function (err, html){
+            res.send(html);
+        });
+    });
+});
 
 var port = process.env.PORT || 3000;
 app.listen(port, function() {
