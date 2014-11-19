@@ -91,4 +91,41 @@ $(function (){
       }
     }
   });
+
+  $('#search-city').keydown(function(event){
+    var city;
+    if(event.which == 13)
+    {
+      console.log($(this).val()=='');
+      if($(this).val() == '')
+      {
+        alert("City can't be null");
+        return;
+      }
+      else
+      {
+        city = $(this).val();
+        $.ajax({
+          url: 'search-city',
+          data:{ city : city },
+          success: function(data)
+          {
+            if(data != null)
+            {
+              if(data.length > 0)
+              {
+                var post = $(".post");
+                container.masonry('remove', post);
+                var html = $(data);
+                html.imagesLoaded(function() {
+                  container.append(html).masonry('appended', html, true);
+                  container.masonry('layout');
+                });
+              }
+            }
+          }
+        });
+      }
+    }
+  });
 });

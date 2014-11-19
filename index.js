@@ -65,7 +65,6 @@ app.get('/init', function (req, res){
             if(err){
                 console.error(err);
             }
-            console.log(results);
             var postList = [];
             results.forEach(function (item){
                 postList.push(item);
@@ -99,7 +98,6 @@ app.get('/load-post', function (req, res){
                 console.error(err);
                 return err;
             }
-            console.log(results);
             var postList = [];
             results.forEach(function (item){
                postList.push(item);
@@ -110,6 +108,29 @@ app.get('/load-post', function (req, res){
             conn.release();
         });
     });
+});
+
+app.get('/search-city', function (req, res){
+    var city = req.query.city;
+    console.log(city);
+    pool.getConnection(function (err, conn){
+        conn.query('select * from tbl_post where location like ?','%' + city + '%', function (err, results){
+            if(err){
+                console.error(err);
+            }
+            else{
+                console.log(results);
+            }
+            var postList = [];
+            results.forEach(function (item){
+               postList.push(item);
+            });
+            res.render('post_template', { postList : postList }, function (err, html){
+                res.send(html);
+            })
+            conn.release();
+        });
+    }) ;
 });
 
 var port = process.env.PORT || 3000;
