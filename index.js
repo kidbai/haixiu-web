@@ -86,7 +86,7 @@ app.get('/init', function (req, res){
     }); 
     
     
-// });
+});
 
 // app.get('/load-post', function (req, res){
 //     var page = req.query.page;
@@ -116,5 +116,5 @@ app.get('/init', function (req, res){
 
 var port = process.env.PORT || 3000;
 app.listen(port, function() {
-  console.log("Node app is running at localhost:" + port)
-})
+  console.log("Node app is running at localhost:" + port);
+});
