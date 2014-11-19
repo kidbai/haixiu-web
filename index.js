@@ -103,7 +103,6 @@ app.get('/load-post', function (req, res){
         results.forEach(function (item){
            postList.push(item);
         });
-        // console.log(postList);
         res.render('post_template', { postList: postList }, function (err, html){
             res.send(html);
         });
