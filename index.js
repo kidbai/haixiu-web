@@ -93,18 +93,21 @@ app.get('/load-post', function (req, res){
     var pageSize = 10;
     var n = (page - 1) * 10;
     var sql = "select * from tbl_post limit " + n + "," + pageSize; //改成你那边的数据库表名
-    conn.query(sql, function (err, results){
-        if(err){
-            console.error(err);
-            return err;
-        }
-        console.log(results);
-        var postList = [];
-        results.forEach(function (item){
-           postList.push(item);
-        });
-        res.render('post_template', { postList: postList }, function (err, html){
-            res.send(html);
+    pool.getConnection(function (err, conn){
+        conn.query(sql, function (err, results){
+            if(err){
+                console.error(err);
+                return err;
+            }
+            console.log(results);
+            var postList = [];
+            results.forEach(function (item){
+               postList.push(item);
+            });
+            res.render('post_template', { postList: postList }, function (err, html){
+                res.send(html);
+            });
+            conn.release();
         });
     });
 });
