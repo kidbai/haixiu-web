@@ -121,6 +121,7 @@ $(function (){
 
   $('#search-city').keydown(function(event){
    
+    console.log(window.location);
     var city;
     if(event.which == 13)
     {
@@ -134,11 +135,15 @@ $(function (){
       else
       {
         city = $(this).val();
+        var newUrl = city; 
+        console.log(city);
+        window.history.pushState({path:newUrl}, '', newUrl);
         $.ajax({
           url: 'search-city',
           data:{ city : city },
           success: function(data)
           {
+            
             if(data != null)
             {
               if(data.length > 0)

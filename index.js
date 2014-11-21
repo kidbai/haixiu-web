@@ -94,7 +94,7 @@ app.get('/search-city', function (req, res){
                 console.error(err);
             }
             else{
-                console.log(results);
+                // console.log(results);
             }
             if(results.length == 0)
             {
