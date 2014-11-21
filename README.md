@@ -4,7 +4,7 @@ url: [https://haixiu-web.herokuapp.com/](https://haixiu-web.herokuapp.com/)
 #Components
 - [Bootstrap](http://www.bootcss.com/)
 - [jQuery](http://jquery.com/)
-- [masonry](http://http://masonry.desandro.com/)
+- [masonry](http://masonry.desandro.com/)
 - [imagesloaded.pkgd.min.js](http://masonry.desandro.com/appendix.html)
 
 #Contact
