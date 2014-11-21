@@ -16,7 +16,7 @@ var pool = mysql.createPool(db_config);
 
 var app = express();
 
-app.use(express.compress());
+// app.use(express.compress());
 app.use(express.static(__dirname + '/public'));
 app.engine('.html', ejs.__express);
 app.set('views', __dirname + '/views');
