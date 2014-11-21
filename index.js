@@ -88,7 +88,7 @@ app.get('/search-city', function (req, res){
     var city = req.query.city;
     console.log(city);
     pool.getConnection(function (err, conn){
-        conn.query('select * from tbl_post where location like ?','%' + city + '%', function (err, results){
+        conn.query('select * from tbl_post where location like ? order by id desc','%' + city + '%', function (err, results){
             var postList = [];
             if(err){
                 console.error(err);
