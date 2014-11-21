@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var ejs = require('ejs');
 var mysql = require('mysql');
+var compress = require('compression')();
 
 
 var db_config = ({
@@ -16,7 +17,7 @@ var pool = mysql.createPool(db_config);
 
 var app = express();
 
-// app.use(express.compress());
+app.use(compress);
 app.use(express.static(__dirname + '/public'));
 app.engine('.html', ejs.__express);
 app.set('views', __dirname + '/views');
